@@ -9,16 +9,9 @@ interface SubsButtonProps {
   anoterId: string
   following: string[]
   followers: string[]
-  targetNotification: IAuthor
 }
 
-const SubsButton: FunctionComponent<SubsButtonProps> = ({
-  following,
-  followers,
-  id,
-  anoterId,
-  targetNotification,
-}) => {
+const SubsButton: FunctionComponent<SubsButtonProps> = ({ following, followers, id, anoterId }) => {
   const { updateSub } = useSubUser(id)
   const { updateSubs, isLoading } = useSubsUser(anoterId)
   const { notificationFoll, notificationUnfoll } = useNotificationUser(anoterId)

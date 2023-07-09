@@ -5,7 +5,6 @@ import { IAuthor } from '@/app/types/posts.types'
 import { UserContext } from '@/app/components/layout/Layout'
 import SubsButton from '../../buttons/SubsButton'
 import SettingField from '../setting-field/SettingField'
-import { PostContext } from '../NewsItem'
 
 const InfoCreator: FunctionComponent<{ author: IAuthor; postId: string }> = ({
   author,
@@ -35,7 +34,6 @@ const InfoCreator: FunctionComponent<{ author: IAuthor; postId: string }> = ({
             id={user?.id!}
             followers={user?.followers}
             anoterId={author.id}
-            targetNotification={author}
           />
         )}
         <SettingField postId={postId} userId={user?.id!} authorId={author?.id} />

@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import ChatInput from './chat-input/ChatInput'
-import PersonItem from '../suggested/person-item/PersonItem'
+import ChatItem from './chat-item/ChatItem'
 
 const LiveChat: FunctionComponent = () => {
   return (
@@ -12,8 +12,7 @@ const LiveChat: FunctionComponent = () => {
         </button>
       </div>
       <ul>
-        <PersonItem name={'BigDaddy'} text={'Lorem ipsum?'} button={false} />
-        <PersonItem name={'BigDaddy'} text={'Lorem ipsum?'} button={false} />
+        <ChatItem img={''} nickname={'denis'} />
       </ul>
       <ChatInput />
     </div>
