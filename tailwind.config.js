@@ -1,4 +1,5 @@
-/** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -6,13 +7,18 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+    colors: {
+      pagesBG: '#1A1C26',
+      navBG: '#272932',
+      purple: '#8C67F6',
+      purpleToGrad: '#53348D',
+      gray: '#8F8F8F',
+      white: colors.white,
+      transparent: colors.transparent,
+      green: colors.green,
+      red: colors.red,
     },
+    extend: {},
   },
   plugins: [],
 }
