@@ -2,11 +2,13 @@ import { FunctionComponent, useContext } from 'react'
 import Image from 'next/image'
 import ButtonGradient from '@/app/components/ui/buttons/ButtonGradient'
 import { MaterialIcon } from '@/app/components/ui/icons/MaterialIcon'
-import { UserContext } from '../../Layout'
 import { getBuncoins } from '@/app/utils/buncoins/buncoins'
+import { UserContext } from '@/app/context/UserContext'
+import { LeftSideContext } from '@/app/context/LeftSideContext'
 
 const Coin: FunctionComponent = () => {
   const user = useContext(UserContext)
+  const { setLeftList } = useContext(LeftSideContext)
   return (
     <div className=" w-full bg-navBG h-56 rounded-md p-5 text-white">
       <span className=" font-black">ALTERSKY</span>
@@ -24,13 +26,19 @@ const Coin: FunctionComponent = () => {
         </div>
         <div>
           <div className=" flex gap-3 items-center">
-            <span className=" py-2 px-3 border rounded-full text-xs">
+            <button
+              className=" py-2 px-3 border rounded-full text-xs"
+              onClick={() => setLeftList('FOLLOWERS')}
+            >
               {user?.followers?.length} followers
-            </span>
+            </button>
             <div className=" h-20 w-[1px] bg-gray"></div>
-            <span className=" py-2 px-3 border rounded-full text-xs">
+            <button
+              className=" py-2 px-3 border rounded-full text-xs"
+              onClick={() => setLeftList('FOLLOWING')}
+            >
               {user?.following?.length} following
-            </span>
+            </button>
           </div>
           <div className="flex items-end justify-end mt-5">
             <ButtonGradient text={'Order'} />

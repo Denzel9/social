@@ -2,12 +2,15 @@ import ButtonEmpty from '@/app/components/ui/buttons/ButtonEmpty'
 import classNames from 'classnames'
 import { FunctionComponent, useState } from 'react'
 import CreatePost from '../create-post/CreatePost'
+import { useAuth } from '@clerk/nextjs'
 
 const ListNav: FunctionComponent<{
   type: string
   setType(type: 'POSTS' | 'GIGS'): void
-}> = ({ setType, type }) => {
+  id: string
+}> = ({ setType, type, id }) => {
   const [open, setOpen] = useState(false)
+  const { userId } = useAuth()
   return (
     <div className=" w-full flex items-center justify-between">
       <div>
@@ -31,8 +34,7 @@ const ListNav: FunctionComponent<{
           GIGS
         </button>
       </div>
-
-      <ButtonEmpty text={'Create Post'} fn={() => setOpen(true)} />
+      {userId === id && <ButtonEmpty text={'Create Post'} fn={() => setOpen(true)} />}
       <CreatePost open={open} setOpen={setOpen} />
     </div>
   )

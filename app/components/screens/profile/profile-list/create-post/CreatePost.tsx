@@ -4,8 +4,9 @@ import ButtonGradient from '@/app/components/ui/buttons/ButtonGradient'
 import { IPost } from '@/app/types/posts.types'
 import Input from './input/Input'
 import { currentDate } from '@/app/helpers/getDate'
-import { ToastrContext, UserContext } from '@/app/components/layout/Layout'
 import { useAddPost } from '@/app/hooks/post/usePost'
+import { ToastrContext } from '@/app/context/ToastrContext'
+import { UserContext } from '@/app/context/UserContext'
 
 const CreatePost: FunctionComponent<{
   open: boolean

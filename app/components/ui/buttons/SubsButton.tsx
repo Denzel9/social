@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react'
 import ButtonGradient from './ButtonGradient'
 import { useNotificationUser, useSubUser, useSubsUser } from '@/app/hooks/user/useUser'
 import { MaterialIcon } from '../icons/MaterialIcon'
-import { IAuthor } from '@/app/types/posts.types'
 
 interface SubsButtonProps {
   id: string

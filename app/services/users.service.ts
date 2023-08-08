@@ -11,7 +11,7 @@ export const UserService = {
     return user
   },
   async getAllUser() {
-    const { data: user } = await axiosClassic.get(allUsersAPI())
+    const { data: user } = await axiosClassic.get<IUser[]>(allUsersAPI())
     return user
   },
   async getUserID(authId: string) {

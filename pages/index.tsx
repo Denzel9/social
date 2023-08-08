@@ -1,8 +1,5 @@
-import AuthPage from '@/app/components/screens/auth/AuthPage'
-import { FunctionComponent, useState } from 'react'
+import HomePage from '@/app/components/screens/home/HomePage'
 
-const Auth: FunctionComponent = () => {
-  return <AuthPage />
+export default function Home() {
+  return <HomePage />
 }
-
-export default Auth

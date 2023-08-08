@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext, useState } from 'react'
 import User from './user/User'
 import ProfileList from './profile-list/ProfileList'
-import { UserContext } from '../../layout/Layout'
+import { UserContext } from '@/app/context/UserContext'
 
 const ProfilePage: FunctionComponent = () => {
   const user = useContext(UserContext)
@@ -9,7 +9,7 @@ const ProfilePage: FunctionComponent = () => {
   return (
     <div>
       <User user={user} />
-      <ProfileList id={user?.id!} />
+      <ProfileList id={user?.authId} nickname={user?.nickname} />
     </div>
   )
 }

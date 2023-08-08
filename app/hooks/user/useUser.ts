@@ -1,18 +1,31 @@
 import { UserService } from '@/app/services/users.service'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { useAppSelector } from '../useSelector'
 import { INotification, IUser } from '@/app/types/user.types'
 import { useContext } from 'react'
-import { UserContext } from '@/app/components/layout/Layout'
+import { useAuth } from '@clerk/nextjs'
+import { UserContext } from '@/app/context/UserContext'
 
-export const useGetUser = () => {
-  const authId = useAppSelector((state) => state.user.authId)
-  const { data: user } = useQuery<IUser[]>('user', () => UserService.getUser(authId), {
+export const useAuthUser = () => {
+  const { userId } = useAuth()
+  const { data: user } = useQuery<IUser[]>('user', () => UserService.getUser(userId!), {
     select: (res) => Object.assign({}, ...res),
-    enabled: !!authId,
+    enabled: !!userId,
     refetchInterval: 5000,
   })
   return { user }
+}
+
+export const useGetUser = (nickname: string) => {
+  const { data: currentUser } = useQuery<IUser[]>(
+    'user guest',
+    () => UserService.getUser(nickname),
+    {
+      select: (res) => Object.assign({}, ...res),
+      enabled: !!nickname,
+      refetchInterval: 5000,
+    }
+  )
+  return { currentUser }
 }
 
 export const useGetAllUser = () => {

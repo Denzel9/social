@@ -2,41 +2,40 @@ import { FunctionComponent, ReactNode, createContext, useState } from 'react'
 import Navigation from './navigation/Navigation'
 import Header from './header/Header'
 import Sidebar from './sidebar/Sidebar'
-import { useGetUser } from '@/app/hooks/user/useUser'
-import { IUser } from '@/app/types/user.types'
 import Toastr from '../ui/customToastr/Toastr'
-
-export const UserContext = createContext({} as IUser)
-export const ToastrContext = createContext({} as Itoastr)
-
-interface Itoastr {
-  openToastr: boolean
-  setOpenToastr(open: boolean): void
-}
+import { useAuth } from '@clerk/nextjs'
+import AuthPage from '../screens/auth/AuthPage'
+import LeftSideContexts from '@/app/context/LeftSideContext'
+import UserContexts from '@/app/context/UserContext'
+import ToastrContexts from '@/app/context/ToastrContext'
+import SubsList from '../shared/subsList-modal/SubsList'
 
 const Layout: FunctionComponent<{ children: ReactNode }> = ({ children }) => {
-  const { user } = useGetUser()
-  const [openToastr, setOpenToastr] = useState(false)
-  console.log(user)
-  const toastr = {
-    openToastr,
-    setOpenToastr,
-  }
-
-  return (
-    <UserContext.Provider value={user as unknown as IUser}>
-      <ToastrContext.Provider value={toastr as unknown as Itoastr}>
-        <Toastr />
-        <Navigation />
-        <div className=" w-11/12 float-right">
-          <Header />
-          <div className=" mt-20 p-4 flex items-start gap-5">
-            {children}
-            <Sidebar />
+  const { userId } = useAuth()
+  return userId ? (
+    <UserContexts>
+      <ToastrContexts>
+        <LeftSideContexts>
+          <Toastr />
+          <Navigation />
+          <div className=" w-11/12 float-right">
+            <Header />
+            <div className=" mt-20 p-4 flex items-start gap-5">
+              {children}
+              <Sidebar />
+            </div>
           </div>
-        </div>
-      </ToastrContext.Provider>
-    </UserContext.Provider>
+          <SubsList />
+        </LeftSideContexts>
+      </ToastrContexts>
+    </UserContexts>
+  ) : (
+    <AuthPage>
+      <section className=" w-full h-full flex flex-col items-center mt-20 gap-5 ">
+        <h1 className=" text-6xl font-bold text-white">GAMER SUDIO</h1>
+        {children}
+      </section>
+    </AuthPage>
   )
 }
 

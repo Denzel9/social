@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { IPost } from '@/app/types/posts.types'
-import NewsItem from '@/app/components/ui/news-item/NewsItem'
+import NewsItem from '@/app/components/shared/post-item/PostItem'
 
 const PostsList: FunctionComponent<{ posts: IPost[] }> = ({ posts }) => {
   return (

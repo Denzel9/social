@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import NewsItem from '../../../../ui/news-item/NewsItem'
+import NewsItem from '../../../../shared/post-item/PostItem'
 import { useGetPost } from '@/app/hooks/post/usePost'
 import { IPost } from '@/app/types/posts.types'
 

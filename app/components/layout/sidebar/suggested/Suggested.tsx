@@ -1,18 +1,21 @@
 import { FunctionComponent, useContext, useMemo } from 'react'
-import PersonItem from './person-item/PersonItem'
+import PersonItem from '../../../shared/person-item/PersonItem'
 import { useGetAllUser } from '@/app/hooks/user/useUser'
-import { UserContext } from '../../Layout'
+import { UserContext } from '@/app/context/UserContext'
 
 const Suggested: FunctionComponent = () => {
   const { users } = useGetAllUser()
   const user = useContext(UserContext)
+  const suggUsers = users?.filter(
+    (item) => item.authId !== user?.authId && !user?.following?.includes(item?.id!)
+  )
   return (
     <div className=" w-full h-[275px] bg-navBG mt-5 rounded-md p-5 text-white">
       <span className=" font-black">SUGGESTED FOR YOU</span>
-      <button className=" float-right">See All</button>
-      <ul>
-        {users?.map((item) => {
-          if (item.authId !== user?.authId) {
+      {suggUsers?.length ? <button className=" float-right">See All</button> : null}
+      {suggUsers?.length ? (
+        <ul>
+          {suggUsers?.map((item) => {
             return (
               <PersonItem
                 key={item?.id}
@@ -23,12 +26,15 @@ const Suggested: FunctionComponent = () => {
                 anoterId={item?.id!}
                 name={item?.name}
                 button={true}
-                img={item?.avatar}
+                avatar={item?.avatar}
+                nickname={item?.nickname}
               />
             )
-          }
-        })}
-      </ul>
+          })}
+        </ul>
+      ) : null}
+
+      {suggUsers?.length ? null : <p>There are no users offered to you</p>}
     </div>
   )
 }

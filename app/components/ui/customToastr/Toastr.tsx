@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext } from 'react'
 import { MaterialIcon } from '../icons/MaterialIcon'
-import { ToastrContext } from '../../layout/Layout'
 import classNames from 'classnames'
+import { ToastrContext } from '@/app/context/ToastrContext'
 
 const Toastr: FunctionComponent = () => {
   const toastr = useContext(ToastrContext)

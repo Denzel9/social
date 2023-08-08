@@ -1,13 +1,8 @@
 import Layout from '@/app/components/layout/Layout'
-import { firebaseConfig } from '@/app/lib/firebase'
-import { store } from '@/app/redux/store'
 import '@/styles/globals.scss'
-import { initializeApp } from 'firebase/app'
 import type { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { Provider } from 'react-redux'
-
-initializeApp(firebaseConfig)
+import { ClerkProvider } from '@clerk/nextjs'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,12 +14,12 @@ const queryClient = new QueryClient({
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
+    <ClerkProvider>
+      <QueryClientProvider client={queryClient}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </Provider>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </ClerkProvider>
   )
 }

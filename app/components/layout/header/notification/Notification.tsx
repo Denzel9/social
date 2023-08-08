@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import { FunctionComponent, useContext } from 'react'
-import { UserContext } from '../../Layout'
 import NotificationItem from './notification-item/NotificationItem'
 import ButtonEmpty from '@/app/components/ui/buttons/ButtonEmpty'
 import { useNotificationUser } from '@/app/hooks/user/useUser'
+import { UserContext } from '@/app/context/UserContext'
 
 const Notification: FunctionComponent<{ open: boolean; setOpen(open: boolean): void }> = ({
   open,

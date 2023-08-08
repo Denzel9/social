@@ -1,3 +1,5 @@
+import { IPets } from './pets.types'
+
 export interface IUser {
   id?: string
   email: string
@@ -13,6 +15,7 @@ export interface IUser {
   notification: INotification[]
   liked: string[]
   Buncoins: number
+  pet: IPets
 }
 
 export interface IAuth {

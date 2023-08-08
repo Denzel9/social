@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext } from 'react'
 import HeaderBtnItem from './header-btn-item/HeaderBtnItem'
 import HeaderBtnProfile from './header-btn-item/HeaderBtnProfile'
-import { UserContext } from '../../Layout'
+import { UserContext } from '@/app/context/UserContext'
 
 interface HeaderBtnProps {
   notification: boolean

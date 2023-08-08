@@ -1,12 +1,15 @@
 import { FunctionComponent } from 'react'
 import Image from 'next/image'
 import EditButton from '@/app/components/ui/edit-button/EditButton'
+import { useAuth } from '@clerk/nextjs'
 
 const Avatar: FunctionComponent<{
   avatar: string
   setTarget(open: string): void
   setOpen(open: boolean): void
-}> = ({ avatar, setOpen, setTarget }) => {
+  id: string
+}> = ({ avatar, setOpen, setTarget, id }) => {
+  const { userId } = useAuth()
   return (
     <div className="z-10 relative">
       <Image
@@ -16,9 +19,12 @@ const Avatar: FunctionComponent<{
         width={130}
         height={130}
       />
-      <div className=" text-xl bg-purple  w-9 h-9 p-2 rounded-full absolute left-36 bottom-5 opacity-40 hover:opacity-100 transition-colors">
-        <EditButton setTarget={setTarget} setOpen={setOpen} name={'avatar'} />
-      </div>
+      {userId === id && (
+        <div className=" text-xl bg-purple  w-9 h-9 p-2 rounded-full absolute left-36 bottom-5 opacity-40 hover:opacity-100 transition-colors">
+          <EditButton setTarget={setTarget} setOpen={setOpen} name={'avatar'} />{' '}
+        </div>
+      )}
+
       <button>
         <Image
           className=" absolute right-20 bottom-8"
