@@ -15,7 +15,10 @@ const InfoCreator: FunctionComponent<{ author: IAuthor; postId: string }> = ({
 
   return (
     <div className=" flex items-center justify-between">
-      <Link href={`/user/${author?.nickname}`} className=" flex items-center gap-3">
+      <Link
+        href={author.nickname === user?.nickname! ? '/profile' : `/user/${author?.nickname}`}
+        className=" flex items-center gap-3"
+      >
         {author?.avatar ? (
           <Image
             className=" rounded-full"

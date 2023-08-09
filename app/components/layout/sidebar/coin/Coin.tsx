@@ -30,14 +30,14 @@ const Coin: FunctionComponent = () => {
           <div className=" flex gap-3 items-center">
             <button
               className=" py-2 px-3 border rounded-full text-xs"
-              onClick={() => setLeftList('FOLLOWERS')}
+              onClick={() => setLeftList('FOLLOWERS', 'layout')}
             >
               {user?.followers?.length} followers
             </button>
             <div className=" h-20 w-[1px] bg-gray"></div>
             <button
               className=" py-2 px-3 border rounded-full text-xs"
-              onClick={() => setLeftList('FOLLOWING')}
+              onClick={() => setLeftList('FOLLOWING', 'layout')}
             >
               {user?.following?.length} following
             </button>

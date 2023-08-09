@@ -1,6 +1,6 @@
 import { LeftSideContext } from '@/app/context/LeftSideContext'
 import classNames from 'classnames'
-import { FunctionComponent, useContext } from 'react'
+import { FunctionComponent, useContext, useState } from 'react'
 import { useGetAllUser, useGetUser } from '@/app/hooks/user/useUser'
 import FollowersList from './FollowersList'
 import FollowingList from './FollowingList'
@@ -10,14 +10,14 @@ import { IUser } from '@/app/types/user.types'
 import { UserContext } from '@/app/context/UserContext'
 
 const SubsList: FunctionComponent = () => {
-  const { openLeftSide, setLeftList, target } = useContext(LeftSideContext)
+  const { openLeftSide, setLeftList, target, type } = useContext(LeftSideContext)
   const { users } = useGetAllUser()
   const pathname = usePathname()?.split('/')[2]
   const { currentUser } = useGetUser(pathname!)
   const user = useContext(UserContext)
   return (
     <div
-      onClick={() => setLeftList('')}
+      onClick={() => setLeftList('', 'layout')}
       className={classNames(
         openLeftSide ? '  bg-opacity-30' : '  bg-opacity-0 pointer-events-none',
         ' z-30 fixed top-0 left-0 right-0 bg-navBG w-full h-full'
@@ -31,7 +31,7 @@ const SubsList: FunctionComponent = () => {
         )}
       >
         <h2 className=" text-xl">{target}</h2>
-        {pathname ? (
+        {type === 'user' && pathname && (
           <>
             {target === 'FOLLOWERS' && (
               <FollowersList users={users!} user={currentUser! as unknown as IUser} />
@@ -43,7 +43,9 @@ const SubsList: FunctionComponent = () => {
               <SupportsList users={users!} user={currentUser! as unknown as IUser} />
             )}
           </>
-        ) : (
+        )}
+
+        {type === 'layout' && !pathname && (
           <>
             {target === 'FOLLOWERS' && <FollowersList users={users!} user={user} />}
             {target === 'FOLLOWING' && <FollowingList users={users!} user={user} />}

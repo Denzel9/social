@@ -12,15 +12,18 @@ const FollowField: FunctionComponent<{
 
   return (
     <div className=" flex items-center justify-between text-center gap-5 px-5 z-20">
-      <button onClick={() => setLeftList('FOLLOWERS')}>
+      <button onClick={() => setLeftList('FOLLOWERS', 'user')}>
         <div>{followers?.length || 0}</div>
         <div className=" text-sm">FOLLOWERS</div>
       </button>
-      <button className=" border-r border-l px-3" onClick={() => setLeftList('FOLLOWING')}>
+      <button
+        className=" border-r border-l px-3"
+        onClick={() => setLeftList('FOLLOWING', 'layout')}
+      >
         <div>{following?.length || 0}</div>
         <div className=" text-sm">FOLLOWING</div>
       </button>
-      <button onClick={() => setLeftList('SUPPORTERS')}>
+      <button onClick={() => setLeftList('SUPPORTERS', 'layout')}>
         <div>{supporters?.length || 0}</div>
         <div className=" text-sm">SUPPORTERS</div>
       </button>
