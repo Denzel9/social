@@ -1,8 +1,9 @@
 import ButtonEmpty from '@/app/components/ui/buttons/ButtonEmpty'
-import classNames from 'classnames'
-import { FunctionComponent } from 'react'
+import { ModalCoinsContext } from '@/app/context/ModalCoinsContext'
+import { FunctionComponent, useContext } from 'react'
 
 const LevelRange: FunctionComponent<{ range: number }> = ({ range }) => {
+  const { openModal, setModal } = useContext(ModalCoinsContext)
   return (
     <div className="text-white flex items-center justify-between mt-8 px-5">
       <div>Level 2</div>
@@ -16,7 +17,11 @@ const LevelRange: FunctionComponent<{ range: number }> = ({ range }) => {
           {range}%
         </div>
       </div>
-      <ButtonEmpty text={' Pro Pass'} classname=" text-white border-white hover:bg-purple" />
+      <ButtonEmpty
+        fn={() => setModal('pro')}
+        text={' Pro Pass'}
+        classname=" text-white border-white hover:bg-purple"
+      />
     </div>
   )
 }

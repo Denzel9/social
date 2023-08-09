@@ -1,6 +1,7 @@
 import { FunctionComponent, useState } from 'react'
 import classNames from 'classnames'
 import ButtonGradient from '@/app/components/ui/buttons/ButtonGradient'
+import { useUpdateUser } from '@/app/hooks/user/useUser'
 
 const EditField: FunctionComponent<{
   id: string
@@ -47,9 +48,4 @@ const EditField: FunctionComponent<{
       </div>
     </div>
   )
-}
-
-export default EditField
-function useUpdateUser(id: string, target: string, text: string): { update: any } {
-  throw new Error('Function not implemented.')
 }

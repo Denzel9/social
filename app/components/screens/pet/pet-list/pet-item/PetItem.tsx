@@ -1,5 +1,5 @@
 import { MaterialIcon } from '@/app/components/ui/icons/MaterialIcon'
-import RangeItem from '@/app/components/shared/range-item/RangeItem'
+import RangeItem from '@/app/shared/range-item/RangeItem'
 import { IPets } from '@/app/types/pets.types'
 import Image from 'next/image'
 import Link from 'next/link'

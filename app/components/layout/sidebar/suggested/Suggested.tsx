@@ -1,5 +1,5 @@
 import { FunctionComponent, useContext, useMemo } from 'react'
-import PersonItem from '../../../shared/person-item/PersonItem'
+import PersonItem from '../../../../shared/person-item/PersonItem'
 import { useGetAllUser } from '@/app/hooks/user/useUser'
 import { UserContext } from '@/app/context/UserContext'
 

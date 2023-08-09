@@ -1,4 +1,4 @@
-import RangeItem from '@/app/components/shared/range-item/RangeItem'
+import RangeItem from '@/app/shared/range-item/RangeItem'
 import { IPetsRanges } from '@/app/types/pets.types'
 import { FunctionComponent } from 'react'
 

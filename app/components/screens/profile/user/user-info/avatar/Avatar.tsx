@@ -2,14 +2,20 @@ import { FunctionComponent } from 'react'
 import Image from 'next/image'
 import EditButton from '@/app/components/ui/edit-button/EditButton'
 import { useAuth } from '@clerk/nextjs'
+import Link from 'next/link'
+import { useSinglePets } from '@/app/hooks/pet/usePets'
 
 const Avatar: FunctionComponent<{
   avatar: string
   setTarget(open: string): void
   setOpen(open: boolean): void
   id: string
-}> = ({ avatar, setOpen, setTarget, id }) => {
+  pets: string[]
+}> = ({ avatar, setOpen, setTarget, id, pets }) => {
   const { userId } = useAuth()
+  const currentPet = pets?.slice(-1).join('')
+  const { pet } = useSinglePets(currentPet || '')
+
   return (
     <div className="z-10 relative">
       <Image
@@ -20,20 +26,23 @@ const Avatar: FunctionComponent<{
         height={130}
       />
       {userId === id && (
-        <div className=" text-xl bg-purple  w-9 h-9 p-2 rounded-full absolute left-36 bottom-5 opacity-40 hover:opacity-100 transition-colors">
-          <EditButton setTarget={setTarget} setOpen={setOpen} name={'avatar'} />{' '}
+        <div className=" text-xl bg-purple w-9 h-9 p-2 rounded-full absolute left-40 top-6 bottom-5 opacity-40 hover:opacity-100 transition-colors">
+          <EditButton setTarget={setTarget} setOpen={setOpen} name={'avatar'} />
         </div>
       )}
 
-      <button>
+      <Link href={'/mypet'}>
         <Image
-          className=" absolute right-20 bottom-8"
-          src={'/fox.png'}
+          className=" absolute right-20 bottom-8 rounded-full"
+          src={
+            (pet && pet[0].avatar) ||
+            'https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg'
+          }
           alt={'fox'}
           width={40}
           height={40}
         />
-      </button>
+      </Link>
     </div>
   )
 }

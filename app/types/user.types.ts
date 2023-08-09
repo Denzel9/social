@@ -13,9 +13,9 @@ export interface IUser {
   following: string[]
   supporters: string[]
   notification: INotification[]
-  liked: string[]
+  liked: ILiked[]
   Buncoins: number
-  pet: IPets
+  pets: string[]
 }
 
 export interface IAuth {
@@ -28,4 +28,12 @@ export interface INotification {
   name: string
   id?: string
   message: string
+}
+
+export interface ILiked {
+  id: string
+  img: string
+  title: string
+  author: string
+  postId: string
 }

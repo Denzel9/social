@@ -2,13 +2,15 @@ import { FunctionComponent, useContext } from 'react'
 import Image from 'next/image'
 import ButtonGradient from '@/app/components/ui/buttons/ButtonGradient'
 import { MaterialIcon } from '@/app/components/ui/icons/MaterialIcon'
-import { getBuncoins } from '@/app/utils/buncoins/buncoins'
 import { UserContext } from '@/app/context/UserContext'
 import { LeftSideContext } from '@/app/context/LeftSideContext'
+import { ModalCoinsContext } from '@/app/context/ModalCoinsContext'
 
 const Coin: FunctionComponent = () => {
   const user = useContext(UserContext)
   const { setLeftList } = useContext(LeftSideContext)
+  const { openModal, setModal } = useContext(ModalCoinsContext)
+
   return (
     <div className=" w-full bg-navBG h-56 rounded-md p-5 text-white">
       <span className=" font-black">ALTERSKY</span>
@@ -21,7 +23,7 @@ const Coin: FunctionComponent = () => {
       <div className=" flex justify-between items-center">
         <div className=" flex flex-col items-center mt-8 ml-3">
           <Image src={'/coin.png'} alt={'coin'} width={50} height={50} />
-          <p className=" text-4xl font-bold mt-3">{getBuncoins(user)}</p>
+          <p className=" text-4xl font-bold mt-3">{user?.Buncoins}</p>
           <p>Buncoins</p>
         </div>
         <div>
@@ -41,8 +43,8 @@ const Coin: FunctionComponent = () => {
             </button>
           </div>
           <div className="flex items-end justify-end mt-5">
-            <ButtonGradient text={'Order'} />
-            <ButtonGradient text={'ProPass'} classname=" ml-5" />
+            <ButtonGradient fn={() => setModal('order')} text={'Order'} />
+            <ButtonGradient fn={() => setModal('pro')} text={'ProPass'} classname=" ml-5" />
           </div>
         </div>
       </div>

@@ -1,9 +1,13 @@
 import { IComment, IPost } from '../types/posts.types'
-import { allPostsAPI, allUsersAPI, axiosClassic, getPostByIDAPI } from './endpoints'
+import { allPostsAPI, axiosClassic, getPostByIDAPI } from './endpoints'
 
 export const PostsServices = {
   async getPost() {
-    const { data: post } = await axiosClassic.get(allPostsAPI())
+    const { data: post } = await axiosClassic.get<IPost[]>(allPostsAPI())
+    return post
+  },
+  async getSinglePost(id: string) {
+    const { data: post } = await axiosClassic.get<IPost>(getPostByIDAPI(id))
     return post
   },
   async addPost(data: IPost) {

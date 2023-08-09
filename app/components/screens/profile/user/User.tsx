@@ -7,11 +7,10 @@ import { useAuth } from '@clerk/nextjs'
 
 const User: FunctionComponent<{ user: IUser }> = ({ user }) => {
   const { userId } = useAuth()
-
   return (
     <>
       <UserInfo user={user} />
-      {userId !== user?.authId && <ButtonGroupProfile />}
+      {userId !== user?.authId && <ButtonGroupProfile person={user} />}
       <LevelRange range={80} />
     </>
   )

@@ -36,4 +36,13 @@ export const UserService = {
     const { data: user } = await axiosClassic.put(getUserByIDAPI(id), { notification: data })
     return user
   },
+  async petsUser(id: string, data: string[]) {
+    const { data: user } = await axiosClassic.put(getUserByIDAPI(id), { pets: data })
+    return user
+  },
+
+  async addTipsUser(id: string, data: number) {
+    const { data: user } = await axiosClassic.put(getUserByIDAPI(id), { Buncoins: data })
+    return user
+  },
 }

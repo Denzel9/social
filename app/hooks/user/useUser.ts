@@ -1,7 +1,7 @@
 import { UserService } from '@/app/services/users.service'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { INotification, IUser } from '@/app/types/user.types'
-import { useContext } from 'react'
+import { use, useContext } from 'react'
 import { useAuth } from '@clerk/nextjs'
 import { UserContext } from '@/app/context/UserContext'
 
@@ -12,6 +12,11 @@ export const useAuthUser = () => {
     enabled: !!userId,
     refetchInterval: 5000,
   })
+  return { user }
+}
+
+export const useGetUserById = (id: string) => {
+  const { data: user } = useQuery<IUser>('user by id', () => UserService.getUser(id))
   return { user }
 }
 
@@ -128,4 +133,43 @@ export const useNotificationUser = (id: string) => {
     }
   )
   return { notificationFoll, notificationUnfoll, clearNotification }
+}
+
+export const useUpdatePets = (id: string, target: number) => {
+  const queryClient = useQueryClient()
+  const user = useContext(UserContext)
+
+  const handleClick = () => {
+    const selected = user?.pets.splice(target, 1)
+    user?.pets?.push(...selected!)
+    select(user?.pets)
+  }
+
+  const { mutate: select } = useMutation(
+    'pets select',
+    (data: string[]) => UserService.petsUser(id, data),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['user'] })
+        queryClient.invalidateQueries({ queryKey: ['petsUser'] })
+      },
+    }
+  )
+  return { handleClick }
+}
+
+export const useUpdateTipsUser = (id: string, person: IUser, data: number) => {
+  const queryClient = useQueryClient()
+
+  const updateTips = person?.Buncoins! + data
+  const { mutate: update } = useMutation(
+    'update tips',
+    () => UserService.addTipsUser(id, updateTips),
+    {
+      onSuccess() {
+        queryClient.invalidateQueries({ queryKey: ['user by id'] })
+      },
+    }
+  )
+  return { update }
 }

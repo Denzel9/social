@@ -1,6 +1,6 @@
-import EditField from '@/app/components/screens/profile/user/edit-field/EditField'
+import EditField from '@/app/components/screens/profile/user/edit-user-field/EditUserField'
 import { IUser } from '@/app/types/user.types'
-import { FunctionComponent, use, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import Banner from '../banner/Banner'
 import Avatar from './avatar/Avatar'
 import FollowField from './follow-field/FollowField'
@@ -20,7 +20,13 @@ const UserInfo: FunctionComponent<{ user: IUser }> = ({ user }) => {
           following={user?.following}
           supporters={user?.supporters}
         />
-        <Avatar avatar={user?.avatar} setOpen={setOpen} setTarget={setTarget} id={user?.authId} />
+        <Avatar
+          avatar={user?.avatar}
+          setOpen={setOpen}
+          setTarget={setTarget}
+          id={user?.authId}
+          pets={user?.pets}
+        />
         <PersonalInfo email={user?.email} date={user?.createdAt!} />
       </div>
       <UserName

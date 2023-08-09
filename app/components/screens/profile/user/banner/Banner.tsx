@@ -1,6 +1,5 @@
 import { MaterialIcon } from '@/app/components/ui/icons/MaterialIcon'
 import { useAuth } from '@clerk/nextjs'
-import classNames from 'classnames'
 import Image from 'next/image'
 import { FunctionComponent } from 'react'
 
@@ -19,7 +18,7 @@ const Banner: FunctionComponent<{
     <div className={' relative w-[870px] bg-purple h-[142px] rounded-lg '}>
       <Image
         className=" rounded-lg w-full h-36"
-        src={banner || ''}
+        src={banner || 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg'}
         alt={'banner'}
         width={100}
         height={50}

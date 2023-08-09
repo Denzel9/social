@@ -1,11 +1,8 @@
 import PetHousePage from '@/app/components/screens/pet-house/PetHousePage'
-import { UserContext } from '@/app/context/UserContext'
-import { FunctionComponent, useContext } from 'react'
+import { FunctionComponent } from 'react'
 
 const Mypet: FunctionComponent = () => {
-  const user = useContext(UserContext)
-  console.log(user)
-  return <PetHousePage data={user?.pet || []} />
+  return <PetHousePage />
 }
 
 export default Mypet

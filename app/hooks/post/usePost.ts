@@ -6,7 +6,12 @@ export const useGetPost = () => {
   const { data: post, isLoading } = useQuery<IPost[]>('post', () => PostsServices.getPost())
   return { post, isLoading }
 }
-
+export const useGetSinglePost = (id: string) => {
+  const { data: post, isLoading } = useQuery<IPost>('post single', () =>
+    PostsServices.getSinglePost(id)
+  )
+  return { post, isLoading }
+}
 export const useAddPost = (data: IPost) => {
   const queryClient = useQueryClient()
   const { mutateAsync: addPost } = useMutation('new post', () => PostsServices.addPost(data), {
