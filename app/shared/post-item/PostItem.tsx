@@ -7,6 +7,7 @@ import ButtonGroup from './button-group/ButtonGroup'
 import { IAuthor, IPost } from '@/app/types/posts.types'
 import classNames from 'classnames'
 import Description from './description/Description'
+import SkeletonLoader from '@/app/components/ui/skeleton/Skeleton'
 
 interface IManager {
   openComment: boolean
@@ -55,7 +56,11 @@ const PostItem: FunctionComponent<{ post: IPost; author: IAuthor }> = ({ post, a
         )}
       >
         <InfoCreator author={author} postId={post?.id!} />
-        <Image className=" mt-6" src={post?.img || ''} alt={'post'} width={850} height={200} />
+        {post?.img ? (
+          <Image className=" mt-6" src={post?.img} alt={'post'} width={850} height={200} />
+        ) : (
+          <SkeletonLoader circle={false} width={850} height={400} />
+        )}
         <div className=" flex items-center justify-between mt-3">
           <ButtonGroup id={post?.id!} liked={post?.liked} />
           <Liked liked={post?.liked} />

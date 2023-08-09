@@ -4,7 +4,6 @@ import Logo from '../../layout/navigation/logo/Logo'
 import classNames from 'classnames'
 
 const AuthPage: FunctionComponent<{ children: ReactNode }> = ({ children }) => {
-  const [type, setType] = useState<'login' | 'signUp'>('login')
   return (
     <div className=" z-50 h-full w-full bg-navBG fixed top-0 left-0 text-white flex items-start">
       {children}
