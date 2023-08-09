@@ -24,6 +24,7 @@ const Avatar: FunctionComponent<{
         alt={'avatar'}
         width={130}
         height={130}
+        priority
       />
       {userId === id && (
         <div className=" text-xl bg-purple w-9 h-9 p-2 rounded-full absolute left-40 top-6 bottom-5 opacity-40 hover:opacity-100 transition-colors">
