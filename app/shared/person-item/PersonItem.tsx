@@ -31,7 +31,10 @@ const PersonItem: FunctionComponent<IPersonItem> = ({
   const { setLeftList, openLeftSide } = useContext(LeftSideContext)
   return (
     <div className=" flex items-center justify-between text-white mt-5">
-      <Link href={`/user/${nickname}`} onClick={() => (openLeftSide ? setLeftList('') : '')}>
+      <Link
+        href={`/user/${nickname}`}
+        onClick={() => (openLeftSide ? setLeftList('', 'layout') : '')}
+      >
         <div className=" flex items-center gap-3">
           <Image
             className=" rounded-lg w-14 h-12"
