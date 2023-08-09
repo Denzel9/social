@@ -22,7 +22,7 @@ const Coin: FunctionComponent = () => {
       </div>
       <div className=" flex justify-between items-center">
         <div className=" flex flex-col items-center mt-8 ml-3">
-          <Image src={'/coin.png'} alt={'coin'} width={50} height={50} />
+          <Image src="/coin.png" alt={'coin'} width={50} height={50} />
           <p className=" text-4xl font-bold mt-3">{user?.Buncoins}</p>
           <p>Buncoins</p>
         </div>
