@@ -2,14 +2,19 @@ import { FunctionComponent } from 'react'
 import Coin from './coin/Coin'
 import LiveChat from './favorite-posts/FavoritePosts'
 import Suggested from './suggested/Suggested'
+import { usePathname } from 'next/navigation'
 
 const Sidebar: FunctionComponent = () => {
+  const path = usePathname()
+
   return (
-    <div className=" w-[400px]">
-      <Coin />
-      <Suggested />
-      <LiveChat />
-    </div>
+    path !== '/casino' && (
+      <div className=" w-[400px]">
+        <Coin />
+        <Suggested />
+        <LiveChat />
+      </div>
+    )
   )
 }
 

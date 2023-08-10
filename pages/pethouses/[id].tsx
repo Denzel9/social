@@ -1,12 +1,14 @@
+import PetInfo from '@/app/components/screens/pet-house/pet-info/PetInfo'
 import PetPage from '@/app/components/screens/pet/PetPage'
 import { PetService } from '@/app/services/pet.service'
 import { IPets } from '@/app/types/pets.types'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import Pethouse from '../pethouse'
 import { FunctionComponent } from 'react'
 
 const Pet: FunctionComponent<{ data: IPets }> = ({ data }) => {
-  return data ? <Pethouse /> : null
+  console.log(data)
+
+  return data ? <PetInfo pets={data} /> : null
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

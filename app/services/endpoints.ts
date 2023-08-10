@@ -25,4 +25,4 @@ export const allPostsAPI = () => `/posts`
 export const getPostByIDAPI = (string: string) => `/posts/${string}`
 
 export const allPetAPI = () => '/pet'
-export const allSinglePetAPI = (name: string) => `/pet?filter=${name}`
+export const allSinglePetAPI = (id: string) => `/pet/${id}`

@@ -6,4 +6,7 @@ export const currenMonth =
 export const currenDay =
   date.getDate().toString().length === 1 ? `0${date.getDate()}` : date.getDate()
 
-export const currentDate = `${currenDay}/${currenMonth}/${currenYear}`
+export const currentDate = `${currenYear}-${currenMonth}-${currenDay}`
+
+export const formatDate = (currenYear: number, currenMonth: number, currenDay: number) =>
+  `${currenYear}-${currenMonth}-${currenDay}`

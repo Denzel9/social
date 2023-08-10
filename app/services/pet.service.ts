@@ -6,8 +6,8 @@ export const PetService = {
     const { data: pet } = await axiosPet.get<IPets[]>(allPetAPI())
     return pet
   },
-  async getSinglePets(name: string) {
-    const { data: pet } = await axiosPet.get<IPets[]>(allSinglePetAPI(name))
+  async getSinglePets(id: string) {
+    const { data: pet } = await axiosPet.get<IPets>(allSinglePetAPI(id))
     return pet
   },
 }

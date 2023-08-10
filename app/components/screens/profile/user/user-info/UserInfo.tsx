@@ -15,6 +15,7 @@ const UserInfo: FunctionComponent = () => {
   const [target, setTarget] = useState('')
   const { currentUser, path } = useGetUser()
   const { setLeftList } = useContext(LeftSideContext)
+  console.log(currentUser)
   return path ? (
     <>
       <Banner

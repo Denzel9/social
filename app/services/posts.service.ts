@@ -1,4 +1,4 @@
-import { IComment, IPost } from '../types/posts.types'
+import { IAuthor, IComment, IPost } from '../types/posts.types'
 import { allPostsAPI, axiosClassic, getPostByIDAPI } from './endpoints'
 
 export const PostsServices = {
@@ -26,8 +26,13 @@ export const PostsServices = {
     const { data: post } = await axiosClassic.delete(getPostByIDAPI(id))
     return post
   },
-  async editText(id: string, text: string) {
-    const { data: post } = await axiosClassic.put(getPostByIDAPI(id), { title: text })
+  async editText(id: string, data: string) {
+    const { data: post } = await axiosClassic.put(getPostByIDAPI(id), { title: data })
+    return post
+  },
+
+  async editAuthor(id: string, data: IAuthor) {
+    const { data: post } = await axiosClassic.put(getPostByIDAPI(id), { author: data })
     return post
   },
 }

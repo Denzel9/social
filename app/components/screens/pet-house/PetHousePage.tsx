@@ -1,9 +1,9 @@
-import { FunctionComponent, useContext } from 'react'
+import { FunctionComponent } from 'react'
 import PetInfo from './pet-info/PetInfo'
 import Link from 'next/link'
 import ButtonGradient from '../../ui/buttons/ButtonGradient'
 import { useUserPets } from '@/app/hooks/pet/usePets'
-import ProfilePage from '../profile/ProfilePage'
+import { IPets } from '@/app/types/pets.types'
 
 const PetHousePage: FunctionComponent = () => {
   const { pets, isLoading } = useUserPets()

@@ -1,5 +1,7 @@
+import { UserContext } from '@/app/context/UserContext'
 import { PostsServices } from '@/app/services/posts.service'
-import { IComment, IPost } from '@/app/types/posts.types'
+import { IAuthor, IComment, IPost } from '@/app/types/posts.types'
+import { useContext } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 
 export const useGetPost = () => {
@@ -76,4 +78,28 @@ export const useEditDesc = (id: string, text: string) => {
     }
   )
   return { editDesc }
+}
+
+export const useUpdateAuthor = (id: string) => {
+  const queryClient = useQueryClient()
+
+  const { user } = useContext(UserContext)
+
+  const newAuthor = {
+    id: user?.id!,
+    name: user?.name,
+    nickname: user?.nickname,
+    avatar: user?.avatar,
+  }
+
+  const { mutateAsync: editAuthorData } = useMutation(
+    'edit desc',
+    () => PostsServices.editAuthor(id, newAuthor),
+    {
+      onSuccess() {
+        queryClient.invalidateQueries({ queryKey: ['post'] })
+      },
+    }
+  )
+  return { editAuthorData }
 }

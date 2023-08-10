@@ -12,12 +12,15 @@ export const usePets = () => {
 export const useUserPets = () => {
   const { user } = useContext(UserContext)
   const { data: pets, isLoading } = useQuery<IPets[]>('petsUser', () => PetService.getAllPets(), {
-    select: (res) => res.filter((item) => user?.pets?.includes(item.name)),
+    select: (res) => res.filter((item) => user?.pets?.includes(item.id)),
   })
   return { pets, isLoading }
 }
 
-export const useSinglePets = (name: string) => {
-  const { data: pet } = useQuery<IPets[]>('pets single', () => PetService.getSinglePets(name))
+export const useSinglePets = (pets: string[]) => {
+  const currentPet = pets?.slice(-1).join('')
+  const { data: pet } = useQuery<IPets>('pets single', () => PetService.getSinglePets(currentPet), {
+    enabled: !!currentPet,
+  })
   return { pet }
 }

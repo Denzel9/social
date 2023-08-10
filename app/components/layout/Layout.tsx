@@ -1,18 +1,27 @@
-import { FunctionComponent, ReactNode, createContext, useState } from 'react'
+import { FunctionComponent, ReactNode, createContext, useEffect, useState } from 'react'
 import Navigation from './navigation/Navigation'
 import Header from './header/Header'
 import Sidebar from './sidebar/Sidebar'
 import Toastr from '../ui/customToastr/Toastr'
-import { useAuth } from '@clerk/nextjs'
+import { useAuth, useUser } from '@clerk/nextjs'
 import AuthPage from '../screens/auth/AuthPage'
 import SubsList from '../../shared/subsList-modal/SubsList'
 import ModalCoins from '@/app/shared/modal-coins/ModalCoins'
 import ContextProvider from '@/app/providers/ContextProvider'
 import ScrollTop from './scrollTop/ScrollTop'
+import { useGetAllUser, useIsAuthUser } from '@/app/hooks/user/useUser'
 
 const Layout: FunctionComponent<{ children: ReactNode }> = ({ children }) => {
-  const { userId } = useAuth()
-  return userId ? (
+  const { users } = useGetAllUser()
+  const { findNewUser } = useIsAuthUser()
+  const { user, isSignedIn } = useUser()
+  const searchUser = users?.find((item) => item?.email === user?.primaryEmailAddress?.emailAddress)
+
+  useEffect(() => {
+    if (user && !searchUser) findNewUser()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  return isSignedIn ? (
     <ContextProvider>
       <Toastr />
       <Navigation />

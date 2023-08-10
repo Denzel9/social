@@ -18,7 +18,17 @@ module.exports = {
       green: colors.green,
       red: colors.red,
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        casinoSpin: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+      },
+      animation: {
+        casinoSpin: 'casinoSpin 3s ease-in',
+      },
+    },
   },
   plugins: [],
 }

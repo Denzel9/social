@@ -4,7 +4,7 @@ import ProfileList from './profile-list/ProfileList'
 
 const ProfilePage: FunctionComponent = () => {
   return (
-    <section className=" w-full">
+    <section className=" w-[870px]">
       <User />
       <ProfileList />
     </section>

@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { useSinglePets } from '@/app/hooks/pet/usePets'
 import SkeletonLoader from '@/app/components/ui/skeleton/Skeleton'
 
+import unknown from '@/public/Unknown.jpeg'
+
 const Avatar: FunctionComponent<{
   avatar: string
   setTarget(open: string): void
@@ -15,9 +17,8 @@ const Avatar: FunctionComponent<{
   isLoading: boolean
 }> = ({ avatar, setOpen, setTarget, id, pets, isLoading }) => {
   const { userId } = useAuth()
-  const currentPet = pets?.slice(-1).join('')
-  const { pet } = useSinglePets(currentPet || '')
 
+  const { pet } = useSinglePets(pets)
   return (
     <div className="z-10 relative">
       {isLoading ? (
@@ -43,7 +44,7 @@ const Avatar: FunctionComponent<{
         <Link href={'/mypet'}>
           <Image
             className=" absolute right-20 bottom-8 rounded-full"
-            src={pet! && pet[0].avatar}
+            src={pet?.avatar! || unknown}
             alt={'fox'}
             width={40}
             height={40}

@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode, useState } from 'react'
+import { FunctionComponent, ReactNode } from 'react'
 import Image from 'next/image'
 
 import authBG from '@/public/authbg.png'

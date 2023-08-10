@@ -3,7 +3,7 @@ import { MaterialIcon } from '../../components/ui/icons/MaterialIcon'
 import classNames from 'classnames'
 import { PostContext } from '../post-item/PostItem'
 import SettingItem from './setting-item/SettingItem'
-import { useDeleteLike } from '@/app/hooks/post/usePost'
+import { useDeleteLike, useUpdateAuthor } from '@/app/hooks/post/usePost'
 
 const SettingField: FunctionComponent<{ postId: string; authorId: string; userId: string }> = ({
   postId,
@@ -12,6 +12,7 @@ const SettingField: FunctionComponent<{ postId: string; authorId: string; userId
 }) => {
   const manager = useContext(PostContext)
   const { deletePost } = useDeleteLike(postId)
+  const { editAuthorData } = useUpdateAuthor(postId)
 
   const setHidden = () => {
     manager?.sethiddenPost(postId)
@@ -40,14 +41,15 @@ const SettingField: FunctionComponent<{ postId: string; authorId: string; userId
       >
         <SettingItem text={'Hidden post'} fn={setHidden} icon={'MdHideSource'} />
         {userId === authorId && (
-          <SettingItem text={'Edit text'} fn={setEditText} icon={'MdEditDocument'} />
-        )}
-        {userId === authorId && (
-          <SettingItem
-            text={'Delete post'}
-            fn={() => deletePost()}
-            icon={'MdOutlineStarBorderPurple500'}
-          />
+          <>
+            <SettingItem text={'Edit text'} fn={setEditText} icon={'MdEditDocument'} />
+            <SettingItem
+              text={'Delete post'}
+              fn={() => deletePost()}
+              icon={'MdOutlineStarBorderPurple500'}
+            />
+            <SettingItem text={'Upadate info'} fn={editAuthorData} icon={'MdUpdate'} />
+          </>
         )}
       </div>
     </div>

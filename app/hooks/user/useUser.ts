@@ -1,10 +1,11 @@
 import { UserService } from '@/app/services/users.service'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { INotification, IUser } from '@/app/types/user.types'
-import { use, useContext } from 'react'
-import { useAuth } from '@clerk/nextjs'
+import { useContext } from 'react'
+import { useAuth, useUser } from '@clerk/nextjs'
 import { UserContext } from '@/app/context/UserContext'
 import { usePathname } from 'next/navigation'
+import { formatDate } from '@/app/helpers/getDate'
 
 export const useAuthUser = () => {
   const { userId } = useAuth()
@@ -170,4 +171,56 @@ export const useUpdateTipsUser = (id: string, person: IUser, data: number) => {
     }
   )
   return { update }
+}
+
+export const useIsAuthUser = () => {
+  const { user } = useUser()
+  const newAuthUser = {
+    email: user?.primaryEmailAddress?.emailAddress!,
+    authId: user?.id!,
+    avatar: user?.imageUrl!,
+    banner: '',
+    name: '',
+    createdAt: formatDate(
+      user?.createdAt?.getFullYear()!,
+      user?.createdAt?.getMonth()!,
+      user?.createdAt?.getDay()!
+    ),
+    nickname: user?.firstName!,
+    followers: [],
+    following: [],
+    supporters: [],
+    notification: [],
+    liked: [],
+    Buncoins: 0,
+    pets: [],
+  }
+  const { mutateAsync: findNewUser } = useMutation<IUser>('new user', () =>
+    UserService.addUser(newAuthUser)
+  )
+  return { findNewUser }
+}
+
+export const useAddPetsUser = () => {
+  const { user } = useContext(UserContext)
+  const queryClient = useQueryClient()
+
+  const buyPets = (id: string) => {
+    if (!user.pets.includes(id)) {
+      user.pets.push(id)
+      addPets(user.pets)
+    }
+  }
+
+  const { mutateAsync: addPets, isSuccess } = useMutation(
+    'new pets',
+    (data: string[]) => UserService.addPetsUser(user.id!, data),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['user'] })
+        queryClient.invalidateQueries({ queryKey: ['petsUser'] })
+      },
+    }
+  )
+  return { buyPets, isSuccess }
 }
