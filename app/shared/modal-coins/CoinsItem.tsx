@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import Image from 'next/image'
 
 import coinBig from '@/public/coinBig.png'
-import coin from '@/public/coin.png'
+import coin from '@/public/coin.jpg'
 
 const CoinsItem: FunctionComponent = () => {
   return (
