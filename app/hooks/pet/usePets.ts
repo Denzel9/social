@@ -10,7 +10,7 @@ export const usePets = () => {
 }
 
 export const useUserPets = () => {
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
   const { data: pets, isLoading } = useQuery<IPets[]>('petsUser', () => PetService.getAllPets(), {
     select: (res) => res.filter((item) => user?.pets?.includes(item.name)),
   })

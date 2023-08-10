@@ -7,23 +7,19 @@ const FollowField: FunctionComponent<{
   following: string[]
   supporters: string[]
   id: string
-}> = ({ followers, following, supporters, id }) => {
-  const { setLeftList } = useContext(LeftSideContext)
-
+  setLeftList(type: string): void
+}> = ({ followers, following, supporters, id, setLeftList }) => {
   return (
     <div className=" flex items-center justify-between text-center gap-5 px-5 z-20">
-      <button onClick={() => setLeftList('FOLLOWERS', 'user')}>
+      <button onClick={() => setLeftList('FOLLOWERS')}>
         <div>{followers?.length || 0}</div>
         <div className=" text-sm">FOLLOWERS</div>
       </button>
-      <button
-        className=" border-r border-l px-3"
-        onClick={() => setLeftList('FOLLOWING', 'layout')}
-      >
+      <button className=" border-r border-l px-3" onClick={() => setLeftList('FOLLOWING')}>
         <div>{following?.length || 0}</div>
         <div className=" text-sm">FOLLOWING</div>
       </button>
-      <button onClick={() => setLeftList('SUPPORTERS', 'layout')}>
+      <button onClick={() => setLeftList('SUPPORTERS')}>
         <div>{supporters?.length || 0}</div>
         <div className=" text-sm">SUPPORTERS</div>
       </button>

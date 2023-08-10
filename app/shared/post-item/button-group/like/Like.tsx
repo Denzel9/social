@@ -2,10 +2,10 @@ import { MaterialIcon } from '@/app/components/ui/icons/MaterialIcon'
 import { UserContext } from '@/app/context/UserContext'
 import { useAddLike } from '@/app/hooks/post/usePost'
 import classNames from 'classnames'
-import { FunctionComponent, useContext, useState } from 'react'
+import { FunctionComponent, useContext } from 'react'
 
 const Like: FunctionComponent<{ id: string; liked: string[] }> = ({ id, liked }) => {
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
   let newLiked = liked
   const handleAdd = () => {
     if (!liked.includes(user?.nickname)) {

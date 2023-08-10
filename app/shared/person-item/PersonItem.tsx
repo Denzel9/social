@@ -1,4 +1,3 @@
-import ButtonGradient from '@/app/components/ui/buttons/ButtonGradient'
 import SubsButton from '@/app/components/ui/buttons/SubsButton'
 import { LeftSideContext } from '@/app/context/LeftSideContext'
 import Image from 'next/image'
@@ -6,6 +5,7 @@ import Link from 'next/link'
 import { FunctionComponent, useContext } from 'react'
 
 import unknown from '@/public/Unknown.jpeg'
+import { UserContext } from '@/app/context/UserContext'
 
 interface IPersonItem {
   name: string
@@ -30,12 +30,13 @@ const PersonItem: FunctionComponent<IPersonItem> = ({
   id,
   nickname,
 }) => {
-  const { setLeftList, openLeftSide } = useContext(LeftSideContext)
+  const { setOpenLeftSide, openLeftSide } = useContext(LeftSideContext)
+  const { user } = useContext(UserContext)
   return (
     <div className=" flex items-center justify-between text-white mt-5">
       <Link
-        href={`/user/${nickname}`}
-        onClick={() => (openLeftSide ? setLeftList('', 'layout') : '')}
+        href={id !== user?.id ? '/profile' : `/user/${nickname}`}
+        onClick={() => (openLeftSide ? setOpenLeftSide(false) : '')}
       >
         <div className=" flex items-center gap-3">
           <Image
@@ -51,10 +52,14 @@ const PersonItem: FunctionComponent<IPersonItem> = ({
           </div>
         </div>
       </Link>
-      {button && (
-        <SubsButton following={following} followers={followers} id={id} anoterId={anoterId} />
+
+      {button ? (
+        id === user?.id ? (
+          <SubsButton following={following} followers={followers} id={id} anoterId={anoterId} />
+        ) : null
+      ) : (
+        !button && <p>2h ago</p>
       )}
-      {!button && <p>2h ago</p>}
     </div>
   )
 }

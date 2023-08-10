@@ -6,8 +6,8 @@ import User from '../profile/user/User'
 const UserPage: FunctionComponent<{ user: IUser }> = ({ user }) => {
   return (
     <section className=" w-full">
-      <User user={user} />
-      <ProfileList id={user?.id!} nickname={user?.nickname} />
+      <User />
+      <ProfileList />
     </section>
   )
 }

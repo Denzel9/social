@@ -11,7 +11,7 @@ const InfoCreator: FunctionComponent<{ author: IAuthor; postId: string }> = ({
   author,
   postId,
 }) => {
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   return (
     <div className=" flex items-center justify-between">

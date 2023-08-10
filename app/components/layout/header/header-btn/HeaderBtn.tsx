@@ -16,7 +16,7 @@ const HeaderBtn: FunctionComponent<HeaderBtnProps> = ({
   message,
   setMessage,
 }) => {
-  const user = useContext(UserContext)
+  const { user, isLoading } = useContext(UserContext)
   return (
     <div className=" flex items-center gap-3">
       <span className=" text-white">{user?.nickname}</span>
@@ -30,7 +30,7 @@ const HeaderBtn: FunctionComponent<HeaderBtnProps> = ({
 
         <HeaderBtnItem icon={'MdOutlineForum'} open={message} fn={setMessage} indicatr={[]} />
       </ul>
-      <HeaderBtnProfile avatar={user?.avatar} />
+      <HeaderBtnProfile avatar={user?.avatar} isLoading={isLoading} />
     </div>
   )
 }

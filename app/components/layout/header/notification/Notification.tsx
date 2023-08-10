@@ -9,7 +9,7 @@ const Notification: FunctionComponent<{ open: boolean; setOpen(open: boolean): v
   open,
   setOpen,
 }) => {
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
   const { clearNotification } = useNotificationUser(user?.id!)
   const handleClick = () => {
     clearNotification()

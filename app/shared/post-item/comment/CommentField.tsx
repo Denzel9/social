@@ -13,7 +13,7 @@ interface CommentFieldProps {
 }
 
 const CommentField: FunctionComponent<CommentFieldProps> = ({ id, comment }) => {
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   const [data, setData] = useState<IComment>({
     text: '',

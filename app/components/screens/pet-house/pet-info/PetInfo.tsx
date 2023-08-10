@@ -8,7 +8,7 @@ import { UserContext } from '@/app/context/UserContext'
 import { useUpdatePets } from '@/app/hooks/user/useUser'
 
 const PetInfo: FunctionComponent<{ pets: IPets }> = ({ pets }) => {
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
   const currentPets = user?.pets.indexOf(pets?.name)
   const { handleClick } = useUpdatePets(user?.id!, currentPets)
 

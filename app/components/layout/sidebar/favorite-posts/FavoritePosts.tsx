@@ -4,7 +4,7 @@ import { UserContext } from '@/app/context/UserContext'
 import { useGetPost } from '@/app/hooks/post/usePost'
 
 const FavoritePosts: FunctionComponent = () => {
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
   const { post } = useGetPost()
   const userLikedPosts = post?.filter((item) => item.liked.includes(user?.nickname))
 

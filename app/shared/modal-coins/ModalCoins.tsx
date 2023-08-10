@@ -1,16 +1,13 @@
-import ButtonEmpty from '@/app/components/ui/buttons/ButtonEmpty'
 import { ModalCoinsContext } from '@/app/context/ModalCoinsContext'
 import classNames from 'classnames'
-import Image from 'next/image'
 import { FunctionComponent, useContext, useState } from 'react'
-import CoinsItem from './CoinsItem'
 import { UserContext } from '@/app/context/UserContext'
 import ProPass from './pro-pass/ProPass'
 import OrderCoins from './OrderCoins'
 
 const ModalCoins: FunctionComponent = () => {
   const { openModal, setModal, type, setType } = useContext(ModalCoinsContext)
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   return (
     <section

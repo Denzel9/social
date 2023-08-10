@@ -3,10 +3,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import SkeletonLoader from '@/app/components/ui/skeleton/Skeleton'
 
-const HeaderBtnProfile: FunctionComponent<{ avatar: string }> = ({ avatar }) => {
+const HeaderBtnProfile: FunctionComponent<{ avatar: string; isLoading: boolean }> = ({
+  avatar,
+  isLoading,
+}) => {
   return (
     <Link href={'/profile'}>
-      {avatar ? (
+      {isLoading ? (
+        <SkeletonLoader circle={true} width={50} height={50} />
+      ) : (
         <Image
           className=" rounded-lg"
           src={avatar || '/Unknown.jpeg'}
@@ -14,8 +19,6 @@ const HeaderBtnProfile: FunctionComponent<{ avatar: string }> = ({ avatar }) => 
           width={50}
           height={50}
         />
-      ) : (
-        <SkeletonLoader circle={true} width={50} height={50} />
       )}
     </Link>
   )

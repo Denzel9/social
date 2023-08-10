@@ -9,7 +9,8 @@ const Banner: FunctionComponent<{
   setOpen(open: boolean): void
   banner: string
   id: string
-}> = ({ setOpen, setTarget, banner, id }) => {
+  isLoading: boolean
+}> = ({ setOpen, setTarget, banner, id, isLoading }) => {
   const handleClock = () => {
     setTarget('banner')
     setOpen(true)
@@ -17,7 +18,9 @@ const Banner: FunctionComponent<{
   const { userId } = useAuth()
   return (
     <div className={' relative w-[870px] bg-purple h-[142px] rounded-lg '}>
-      {banner ? (
+      {isLoading ? (
+        <SkeletonLoader circle={false} width={870} height={142} />
+      ) : (
         <Image
           className=" rounded-lg w-full h-36"
           src={banner}
@@ -25,8 +28,6 @@ const Banner: FunctionComponent<{
           width={100}
           height={50}
         />
-      ) : (
-        <SkeletonLoader circle={false} width={870} height={142} />
       )}
       {userId === id && (
         <button

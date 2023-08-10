@@ -5,7 +5,7 @@ import { IPost } from '@/app/types/posts.types'
 const PostPage: FunctionComponent<{ posts: IPost }> = ({ posts }) => {
   return (
     <section className=" w-full -my-5">
-      <PostItem post={posts!} author={posts?.author!} />
+      <PostItem post={posts!} author={posts?.author!} isLoading={false} />
     </section>
   )
 }

@@ -10,14 +10,13 @@ import { IUser } from '@/app/types/user.types'
 import { UserContext } from '@/app/context/UserContext'
 
 const SubsList: FunctionComponent = () => {
-  const { openLeftSide, setLeftList, target, type } = useContext(LeftSideContext)
+  const { openLeftSide, setLeftList, target, person } = useContext(LeftSideContext)
   const { users } = useGetAllUser()
-  const pathname = usePathname()?.split('/')[2]
-  const { currentUser } = useGetUser(pathname!)
-  const user = useContext(UserContext)
+  const { currentUser, path } = useGetUser()
+  const { user } = useContext(UserContext)
   return (
     <div
-      onClick={() => setLeftList('', 'layout')}
+      onClick={() => setLeftList('', user)}
       className={classNames(
         openLeftSide ? '  bg-opacity-30' : '  bg-opacity-0 pointer-events-none',
         ' z-30 fixed top-0 left-0 right-0 bg-navBG w-full h-full'
@@ -31,7 +30,7 @@ const SubsList: FunctionComponent = () => {
         )}
       >
         <h2 className=" text-xl">{target}</h2>
-        {type === 'user' && pathname && (
+        {person?.nickname !== user?.nickname && (
           <>
             {target === 'FOLLOWERS' && (
               <FollowersList users={users!} user={currentUser! as unknown as IUser} />
@@ -45,7 +44,7 @@ const SubsList: FunctionComponent = () => {
           </>
         )}
 
-        {type === 'layout' && !pathname && (
+        {person?.nickname === user?.nickname && (
           <>
             {target === 'FOLLOWERS' && <FollowersList users={users!} user={user} />}
             {target === 'FOLLOWING' && <FollowingList users={users!} user={user} />}

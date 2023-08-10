@@ -4,15 +4,16 @@ import { INotification, IUser } from '@/app/types/user.types'
 import { use, useContext } from 'react'
 import { useAuth } from '@clerk/nextjs'
 import { UserContext } from '@/app/context/UserContext'
+import { usePathname } from 'next/navigation'
 
 export const useAuthUser = () => {
   const { userId } = useAuth()
-  const { data: user } = useQuery<IUser[]>('user', () => UserService.getUser(userId!), {
+  const { data: user, isLoading } = useQuery<IUser[]>('user', () => UserService.getUser(userId!), {
     select: (res) => Object.assign({}, ...res),
     enabled: !!userId,
     refetchInterval: 5000,
   })
-  return { user }
+  return { user, isLoading }
 }
 
 export const useGetUserById = (id: string) => {
@@ -20,17 +21,14 @@ export const useGetUserById = (id: string) => {
   return { user }
 }
 
-export const useGetUser = (nickname: string) => {
-  const { data: currentUser } = useQuery<IUser[]>(
-    'user guest',
-    () => UserService.getUser(nickname),
-    {
-      select: (res) => Object.assign({}, ...res),
-      enabled: !!nickname,
-      refetchInterval: 5000,
-    }
-  )
-  return { currentUser }
+export const useGetUser = () => {
+  const path = usePathname()?.split('/')[2]
+  const { data: currentUser } = useQuery('user guest', () => UserService.getUser(path!), {
+    select: (res) => Object.assign({}, ...res) as IUser,
+    enabled: !!path,
+    refetchInterval: 5000,
+  })
+  return { currentUser, path }
 }
 
 export const useGetAllUser = () => {
@@ -80,7 +78,7 @@ export const useSubsUser = (id: string) => {
 
 export const useNotificationUser = (id: string) => {
   const queryClient = useQueryClient()
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
   const notification: INotification[] = []
   const notificationAdd: INotification = {
     id: user?.id!,
@@ -137,7 +135,7 @@ export const useNotificationUser = (id: string) => {
 
 export const useUpdatePets = (id: string, target: number) => {
   const queryClient = useQueryClient()
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   const handleClick = () => {
     const selected = user?.pets.splice(target, 1)

@@ -9,7 +9,7 @@ import { ModalCoinsContext } from '@/app/context/ModalCoinsContext'
 import coin from '@/public/coin.jpg'
 
 const Coin: FunctionComponent = () => {
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
   const { setLeftList } = useContext(LeftSideContext)
   const { openModal, setModal } = useContext(ModalCoinsContext)
 
@@ -32,14 +32,14 @@ const Coin: FunctionComponent = () => {
           <div className=" flex gap-3 items-center">
             <button
               className=" py-2 px-3 border rounded-full text-xs"
-              onClick={() => setLeftList('FOLLOWERS', 'layout')}
+              onClick={() => setLeftList('FOLLOWERS', user)}
             >
               {user?.followers?.length} followers
             </button>
             <div className=" h-20 w-[1px] bg-gray"></div>
             <button
               className=" py-2 px-3 border rounded-full text-xs"
-              onClick={() => setLeftList('FOLLOWING', 'layout')}
+              onClick={() => setLeftList('FOLLOWING', user)}
             >
               {user?.following?.length} following
             </button>

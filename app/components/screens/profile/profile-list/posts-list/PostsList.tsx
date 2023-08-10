@@ -6,7 +6,7 @@ const PostsList: FunctionComponent<{ posts: IPost[] }> = ({ posts }) => {
   return (
     <ul>
       {posts?.map((item) => {
-        return <PostItem key={item.id} post={item} author={item.author} />
+        return <PostItem key={item.id} post={item} author={item.author} isLoading={false} />
       })}
     </ul>
   )

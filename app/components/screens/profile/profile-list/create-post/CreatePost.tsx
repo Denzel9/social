@@ -13,7 +13,7 @@ const CreatePost: FunctionComponent<{
   setOpen(open: boolean): void
 }> = ({ open, setOpen }) => {
   const toastr = useContext(ToastrContext)
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
   const [post, setPost] = useState<IPost>({
     title: '',
     img: '',

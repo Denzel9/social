@@ -5,7 +5,7 @@ import { UserContext } from '@/app/context/UserContext'
 
 const Suggested: FunctionComponent = () => {
   const { users } = useGetAllUser()
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
   const suggUsers = users?.filter(
     (item) => item.authId !== user?.authId && !user?.following?.includes(item?.id!)
   )

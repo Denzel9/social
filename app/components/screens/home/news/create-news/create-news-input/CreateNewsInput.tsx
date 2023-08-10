@@ -7,7 +7,7 @@ import { UserContext } from '@/app/context/UserContext'
 import { ToastrContext } from '@/app/context/ToastrContext'
 
 const CreateNewsInput: FunctionComponent = () => {
-  const user = useContext(UserContext)
+  const { user } = useContext(UserContext)
   const toastr = useContext(ToastrContext)
   const [type, setType] = useState<'title' | 'img'>('title')
   const [post, setPost] = useState<IPost>({
