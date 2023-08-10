@@ -5,6 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FunctionComponent, useContext } from 'react'
 
+import unknown from '@/public/Unknown.jpeg'
+
 interface IPersonItem {
   name: string
   button: boolean
@@ -38,7 +40,7 @@ const PersonItem: FunctionComponent<IPersonItem> = ({
         <div className=" flex items-center gap-3">
           <Image
             className=" rounded-lg w-14 h-12"
-            src={avatar || '/Unknown.jpeg'}
+            src={avatar || unknown}
             alt="Unknown"
             width={50}
             height={50}

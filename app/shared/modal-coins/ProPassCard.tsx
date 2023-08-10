@@ -3,6 +3,8 @@ import { MaterialIcon } from '@/app/components/ui/icons/MaterialIcon'
 import Image from 'next/image'
 import { FunctionComponent } from 'react'
 
+import razor from '@/public/razor.png'
+
 const ProPassCard: FunctionComponent = () => {
   return (
     <div className=" h-3/5 hover:scale-110 transition-all w-1/3 rounded-lg  p-5 bg-navBG text-white hover:bg-gradient-to-b from-purple to-purpleToGrad">
@@ -13,7 +15,7 @@ const ProPassCard: FunctionComponent = () => {
         </div>
         <Image
           className="p-2 w-10 h-10 rounded-full bg-pagesBG"
-          src={'/razor.png'}
+          src={razor}
           alt="razor"
           width={20}
           height={20}
