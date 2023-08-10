@@ -1,14 +1,14 @@
 import { FunctionComponent } from 'react'
-import NewsItem from '../../../../../shared/post-item/PostItem'
 import { useGetPost } from '@/app/hooks/post/usePost'
 import { IPost } from '@/app/types/posts.types'
+import PostItem from '@/app/shared/post-item/PostItem'
 
 const NewsList: FunctionComponent = () => {
-  const { post } = useGetPost()
+  const { post, isLoading } = useGetPost()
   return (
     <ul>
       {post?.map((item: IPost) => {
-        return <NewsItem key={item?.id} author={item?.author} post={item} />
+        return <PostItem key={item?.id} author={item?.author} post={item} isLoading={isLoading} />
       })}
     </ul>
   )

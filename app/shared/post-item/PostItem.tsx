@@ -22,7 +22,11 @@ interface IManager {
 
 export const PostContext = createContext<IManager>({} as IManager)
 
-const PostItem: FunctionComponent<{ post: IPost; author: IAuthor }> = ({ post, author }) => {
+const PostItem: FunctionComponent<{ post: IPost; author: IAuthor; isLoading: boolean }> = ({
+  post,
+  author,
+  isLoading,
+}) => {
   const [openComment, setOpenComment] = useState(false)
   const [openSettingField, setOpenSettingField] = useState(false)
   const [hiddenPost, sethiddenPost] = useState('')
@@ -56,10 +60,10 @@ const PostItem: FunctionComponent<{ post: IPost; author: IAuthor }> = ({ post, a
         )}
       >
         <InfoCreator author={author} postId={post?.id!} />
-        {post?.img ? (
-          <Image className=" mt-6" src={post?.img} alt={'post'} width={850} height={200} />
-        ) : (
+        {isLoading ? (
           <SkeletonLoader circle={false} width={850} height={400} />
+        ) : (
+          <Image className=" mt-6" src={post?.img} alt={'post'} width={850} height={200} />
         )}
         <div className=" flex items-center justify-between mt-3">
           <ButtonGroup id={post?.id!} liked={post?.liked} />
