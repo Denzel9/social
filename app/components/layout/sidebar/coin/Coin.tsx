@@ -6,6 +6,8 @@ import { UserContext } from '@/app/context/UserContext'
 import { LeftSideContext } from '@/app/context/LeftSideContext'
 import { ModalCoinsContext } from '@/app/context/ModalCoinsContext'
 
+import coin from '@/public/coin.jpg'
+
 const Coin: FunctionComponent = () => {
   const user = useContext(UserContext)
   const { setLeftList } = useContext(LeftSideContext)
@@ -22,13 +24,7 @@ const Coin: FunctionComponent = () => {
       </div>
       <div className=" flex justify-between items-center">
         <div className=" flex flex-col items-center mt-8 ml-3">
-          <Image
-            className=" rounded-full"
-            src={'/static/coin.jpg'}
-            alt={'coin'}
-            width={50}
-            height={50}
-          />
+          <Image className=" rounded-full" src={coin} alt={'coin'} width={50} height={50} />
           <p className=" text-4xl font-bold mt-3">{user?.Buncoins}</p>
           <p>Buncoins</p>
         </div>
