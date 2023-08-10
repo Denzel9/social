@@ -8,7 +8,7 @@ const CoinsItem: FunctionComponent = () => {
   return (
     <div className=" w-full h-48 bg-navBG rounded-lg p-5 flex flex-col justify-between cursor-pointer transition-colors hover:bg-gradient-to-b from-purple to-purpleToGrad">
       <div className="flex items-center justify-center gap-3 ">
-        <Image src={coin} alt={'coin'} width={30} height={30} />
+        <Image className=" rounded-full" src={coin} alt={'coin'} width={30} height={30} />
         <span>5 Coins</span>
       </div>
       <Image className=" mx-auto mt-5" src={coinBig} alt={'coin'} width={100} height={100} />
